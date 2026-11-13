@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>SELENE — Instalación y Funcionamiento</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @font-face {
+    font-family: 'Selene';
+    src: url('fonts/Selene-Regular.ttf') format('truetype'),
+         url('Selene/fonts/Selene-Regular.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  body {
+    background: #f3f4f6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #111827;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .prospecto {
+    max-width: 560px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 36px 24px 48px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    min-height: 100vh;
+  }
+
+  @media (min-width: 600px) {
+    body {
+      padding: 28px 16px;
+    }
+    .prospecto {
+      padding: 48px 44px 56px;
+      border-radius: 14px;
+      min-height: auto;
+    }
+  }
+
+  /* Cabecera / Portada integrada */
+  .cover-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 0 28px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .cover-logo {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Selene', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 5px;
+    color: #E8CA72;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .cover-divider {
+    width: 56px;
+    height: 1.5px;
+    background: #111827;
+    margin: 14px 0;
+  }
+
+  .cover-subtitle {
+    font-size: 0.82rem;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: #4b5563;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  /* Tipografía de secciones */
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 2px solid #111827;
+    padding-bottom: 6px;
+    margin-top: 32px;
+    margin-bottom: 14px;
+  }
+
+  h2:first-of-type {
+    margin-top: 4px;
+  }
+
+  h3 {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-top: 18px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  ol, ul {
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  li {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #374151;
+    margin-bottom: 6px;
+  }
+
+  strong {
+    color: #111827;
+    font-weight: 600;
+  }
+
+  code {
+    background: #f3f4f6;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.86rem;
+    color: #111827;
+  }
+
+  .subnote {
+    font-size: 0.83rem;
+    color: #6b7280;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+  }
+
+  .badge-excl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #181b22;
+    border: 1px solid #E8CA72;
+    color: #E8CA72;
+    font-size: 10px;
+    font-weight: 800;
+    font-style: normal;
+    line-height: 1;
+    vertical-align: middle;
+    margin: 0 2px;
+  }
+
+  /* Tabla de especificaciones */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .spec-table tr {
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .spec-table td {
+    padding: 10px 0;
+    font-size: 0.9rem;
+  }
+  .spec-table td.label {
+    color: #6b7280;
+  }
+  .spec-table td.val {
+    color: #111827;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* Réplica vectorial de la tarjeta Vincular Selene */
+  .vincular-card {
+    background: linear-gradient(135deg, #1d212a 0%, #161920 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    padding: 20px 18px;
+    width: 100%;
+    max-width: 310px;
+    margin: 18px auto 22px auto;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  .vincular-title {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #E8CA72;
+    margin-bottom: 5px;
+  }
+  .vincular-sub {
+    font-size: 0.76rem;
+    color: #8b949e;
+    line-height: 1.45;
+    margin-bottom: 16px;
+  }
+  .vincular-sub b {
+    color: #f0f3f6;
+  }
+  .vincular-field {
+    text-align: left;
+    margin-bottom: 13px;
+  }
+  .vincular-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8b949e;
+    margin-bottom: 6px;
+  }
+  .vincular-input {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.84rem;
+    color: #f0f3f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vincular-input svg {
+    width: 15px;
+    height: 15px;
+    color: #8b949e;
+    flex-shrink: 0;
+  }
+  .vincular-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px 0;
+    background: linear-gradient(135deg, #ffd54f, #ffb300);
+    color: #1a1500;
+    border-radius: 11px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(255, 213, 79, 0.35);
+  }
+
+  /* Réplica vectorial del banner de Próximo Evento */
+  .event-banner {
+    background: linear-gradient(135deg, #1d212a 0%, #161920 100%);
+    border: 1px solid rgba(233, 201, 114, 0.35);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+    max-width: 380px;
+    margin: 18px auto 22px auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  .event-banner-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .event-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E9C972;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .event-tag svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+  .event-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: rgba(233, 201, 114, 0.15);
+    color: #E9C972;
+    border: 1px solid rgba(233, 201, 114, 0.35);
+    padding: 1px 8px;
+    border-radius: 6px;
+  }
+  .event-banner-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .event-title {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #f0f3f6;
+  }
+  .event-date {
+    font-size: 0.74rem;
+    color: #8b949e;
+  }
+  .event-info-icon {
+    color: #8b949e;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  /* Banner Evento Hoy */
+  .live-status-box {
+    background: linear-gradient(135deg, #1d212a 0%, #161920 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    max-width: 380px;
+    margin: 18px auto 22px auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  .live-pulse {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.85);
+    flex-shrink: 0;
+  }
+  .live-status-text {
+    font-size: 0.75rem;
+    color: #8b949e;
+    line-height: 1.35;
+  }
+  .live-status-text strong {
+    color: #f0f3f6;
+    font-size: 0.82rem;
+    display: block;
+  }
+
+  /* Tarjetas Eventos Astronómicos y Simulación */
+  .ui-card-mini {
+    background: linear-gradient(135deg, #1d212a 0%, #161920 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 14px 16px;
+    width: 100%;
+    max-width: 360px;
+    margin: 18px auto 22px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  .ui-card-section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #8b949e;
+    margin-bottom: 2px;
+  }
+  .ui-switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    background: #11141c;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+  }
+  .ui-switch-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #f0f3f6;
+  }
+  .ui-switch-label svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .ui-switch-capsule {
+    width: 34px;
+    height: 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f0d588, #E8CA72);
+    box-shadow: 0 0 8px rgba(232, 202, 114, 0.35);
+    padding: 2px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .ui-switch-knob {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1a1500;
+  }
+  .ui-tests-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .ui-btn-test {
+    padding: 10px 8px;
+    background: rgba(233, 201, 114, 0.09);
+    border: 1px dashed rgba(233, 201, 114, 0.45);
+    border-radius: 10px;
+    color: #E9C972;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .ui-btn-test.span-2 {
+    grid-column: span 2;
+  }
+
+  /* Botones redondos inferiores */
+  .icon-actions-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 18px auto 22px auto;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .btn-icon-action {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #21262d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  }
+  .btn-icon-action svg {
+    width: 21px;
+    height: 21px;
+  }
+  .btn-icon-action .matter-icon {
+    transform: translateY(-1.5px);
+  }
+
+  /* Modal Código Matter */
+  .matter-modal-card {
+    background: #181b22;
+    border: 1px solid rgba(233, 201, 114, 0.35);
+    border-radius: 15px;
+    padding: 14px 16px;
+    width: 100%;
+    max-width: 310px;
+    margin: 18px auto 22px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+  }
+  .matter-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+  }
+  .matter-modal-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #E8CA72;
+  }
+  .matter-modal-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #8b949e;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .matter-code-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 8px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .matter-code-num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #ffffff;
+  }
+  .matter-copy-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(232, 202, 114, 0.15);
+    border: 1px solid rgba(232, 202, 114, 0.35);
+    color: #E8CA72;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .matter-copy-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .prospecto { box-shadow: none; max-width: 100%; padding: 15mm 18mm; }
+  }
+</style>
+</head>
+<body>
+
+  <main class="prospecto">
+    <!-- PORTADA / CABECERA -->
+    <header class="cover-header">
+      <div class="cover-logo">
+        <svg viewBox="105.27 228.57 384.74 384.74" width="100%" height="100%">
+          <path d="M157.64 420.94H111.27A186.37 186.37 0 0 0 295.72 607.31L296.2 560.94M437.64 420.94H484.01A186.37 186.37 0 0 0 299.55 234.58L299.07 280.94" fill="none" stroke="#E8CA72" stroke-width="8"/>
+          <path d="M154.69 420.94A142.95 142.95 0 1 0 440.59 420.94A142.95 142.95 0 1 0 154.69 420.94ZM226.07 386.3A35.57 35.57 0 1 0 297.21 386.3A35.57 35.57 0 1 0 226.07 386.3ZM235.57 386.3A26.07 26.07 0 1 0 287.71 386.3A26.07 26.07 0 1 0 235.57 386.3ZM313.31 456.9A21.95 21.95 0 1 0 357.21 456.9A21.95 21.95 0 1 0 313.31 456.9Z" fill="#E8CA72" fill-rule="evenodd"/>
+        </svg>
+      </div>
+      <h1>SELENE</h1>
+      <div class="cover-divider"></div>
+      <p class="cover-subtitle">Instalación<br>y Funcionamiento</p>
+    </header>
+
+    <!-- 1. PUESTA EN MARCHA -->
+    <h2>1. Puesta en marcha</h2>
+
+    <h3>1.1. Conectar Selene</h3>
+    <p>Conectar la fuente de alimentación a la lámpara y a la toma de corriente. Selene encenderá en <strong>Modo Fijo</strong>.</p>
+
+    <h3>1.2. Conexión a la red Wi-Fi</h3>
+    <p>Mantener pulsado el botón/rueda durante <strong>5 segundos</strong> hasta iniciar el modo vinculación:</p>
+
+    <p style="margin-bottom: 4px;"><strong>A) Desde la App Selene (Android):</strong></p>
+    <ol>
+      <li>Abrir la app <code>Selene</code> en el móvil.</li>
+      <li>Seleccionar la red Wi-Fi doméstica (<strong>2,4 GHz</strong>), escribir la contraseña y pulsar <strong>VINCULAR</strong> para completar el enlace automático.</li>
+    </ol>
+    <div class="vincular-card">
+      <div class="vincular-title">Vincular Selene</div>
+      <div class="vincular-sub">Mantén pulsado el mando durante <b>5 segundos</b> y selecciona tu red Wi-Fi (2,4 GHz).</div>
+      <div class="vincular-field">
+        <span class="vincular-label">Red Wi-Fi</span>
+        <div class="vincular-input">
+          <span>Mi_Red_WiFi</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+      </div>
+      <div class="vincular-field">
+        <span class="vincular-label">Contraseña Wi-Fi</span>
+        <div class="vincular-input">
+          <span style="letter-spacing: 1px;">••••••••</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+      </div>
+      <div class="vincular-btn">VINCULAR</div>
+    </div>
+
+    <p style="margin-bottom: 4px;"><strong>B) Sin la app (iPhone, PC o navegador web):</strong></p>
+    <ol>
+      <li>Conectar a la red propia emitida por Selene:<br>
+        &bull; <strong>SSID:</strong> <code>Selene</code> &bull; <strong>Contraseña:</strong> <code>selene2026</code>
+      </li>
+      <li>Abrir el navegador y acceder a: <strong><code>http://192.168.4.1</code></strong></li>
+      <li>Seleccionar la red Wi-Fi doméstica (<strong>2,4 GHz</strong>), escribir la contraseña y pulsar <strong>Conectar</strong>.<br>
+        <span class="subnote">(Red de configuración activa durante 5 minutos).</span>
+      </li>
+      <li>Una vez enlazada al router, ya se puede acceder a: <strong><code>http://selene.local</code></strong></li>
+    </ol>
+    <p style="margin-top: 8px;">
+      <strong>Instalar en iPhone:</strong> en Safari, pulsar <strong>Compartir (⎋)</strong> y seleccionar <strong>"Añadir a pantalla de inicio" (➕)</strong> para tenerla como app a pantalla completa.
+    </p>
+
+    <!-- 2. DENTRO DE SELENE -->
+    <h2>2. Dentro de Selene</h2>
+    <p>Controles disponibles desde app o web:</p>
+
+    <h3>Avisos</h3>
+    <ul>
+      <li><strong>Próximo evento:</strong> indica el próximo fenómeno astronómico (eclipse lunar o lluvia de estrellas), la fecha en que será visible y los días que faltan. Al tocarlo se abre una ficha con más detalles.</li>
+    </ul>
+    <div class="event-banner">
+      <div class="event-banner-top">
+        <span class="event-tag">
+          <svg viewBox="0 0 64 64" fill="#E8CA72">
+            <path d="M22.75 16.43 A21 21 0 1 0 47.57 41.25 A18 18 0 0 1 22.75 16.43 Z"/>
+            <path d="M46 8 L49 17 L58 20 L49 23 L46 32 L43 23 L34 20 L43 17 Z"/>
+            <circle cx="56" cy="44" r="2.5"/>
+            <circle cx="12" cy="8" r="2"/>
+          </svg>
+          PRÓXIMO EVENTO
+        </span>
+        <span class="event-badge">En 5 días</span>
+      </div>
+      <div class="event-banner-body">
+        <div>
+          <div class="event-title">Lluvia de Leónidas</div>
+          <div class="event-date">Visibles del 16 al 18 de Noviembre</div>
+        </div>
+        <span class="event-info-icon">&#9432;</span>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Evento hoy:</strong> solo aparece cuando hay un fenómeno activo ese mismo día.</li>
+    </ul>
+    <div class="live-status-box">
+      <span class="live-pulse"></span>
+      <span class="live-status-text">
+        <strong>Activa hoy &middot; Visibles del 16 al 18 de Noviembre</strong>
+        Lluvia de Leónidas (Leo)
+      </span>
+    </div>
+
+    <h3>Encendido y modo</h3>
+    <ul>
+      <li><strong>Encender / Apagar.</strong></li>
+      <li><strong>Modo Live:</strong> reproduce la fase lunar real según fecha, hora y ubicación (requiere conexión a Internet).</li>
+      <li><strong>Modo Fijo:</strong> luz uniforme, como una lámpara convencional.</li>
+    </ul>
+
+    <h3>Brillo y temperatura</h3>
+    <ul>
+      <li><strong>Intensidad de brillo</strong> y <strong>Temperatura de color</strong>: barras de ajuste, con botón <strong>↺</strong> para volver al valor por defecto.</li>
+    </ul>
+
+    <h3>Solo en Modo Live</h3>
+    <ul>
+      <li><strong>Brillo automático:</strong> adapta la intensidad a la fase lunar. Mientras está activa, la barra y su ↺ quedan bloqueados.</li>
+      <li><strong>Color automático:</strong> ajusta el tono según la hora solar. Mientras está activa, la barra y su ↺ quedan bloqueados.</li>
+      <li><strong>Luz cenicienta:</strong> interruptor que ilumina el contorno de la Luna.</li>
+    </ul>
+
+    <h3>Eventos astronómicos</h3>
+    <ul>
+      <li>Activar o desactivar <em>Eclipses lunares</em> y <em>Lluvia de estrellas</em>.</li>
+    </ul>
+    <div class="ui-card-mini">
+      <div class="ui-card-section-title">Eventos Astronómicos</div>
+      <div class="ui-switch-row">
+        <div class="ui-switch-label">
+          <svg viewBox="0 0 294 294" fill="none">
+            <path d="M4 147 C4 68.023 68.023 4 147 4 C225.977 4 290 68.023 290 147 C290 225.977 225.977 290 147 290 C68.023 290 4 225.977 4 147 Z M166.124 32 C102.611 32 51.124 83.487 51.124 147 C51.124 210.513 102.611 262 166.124 262 C229.637 262 281.124 210.513 281.124 147 C281.124 83.487 229.637 32 166.124 32 Z" fill="#e8ca72"/>
+            <path d="M114.312 126.362 C111.236 112.221 120.206 98.264 134.347 95.188 C148.487 92.112 162.444 101.082 165.52 115.223 C168.596 129.363 159.626 143.32 145.486 146.396 C131.345 149.472 117.388 140.502 114.312 126.362 Z M135.834 102.026 C125.47 104.281 118.896 114.51 121.15 124.875 C123.405 135.238 133.634 141.812 143.998 139.558 C154.362 137.303 160.936 127.074 158.682 116.711 C156.427 106.346 146.198 99.772 135.834 102.026 Z" fill="#e8ca72"/>
+            <path d="M186.966 178.44 C188.733 186.563 196.751 191.716 204.875 189.949 C212.999 188.182 218.152 180.164 216.385 172.041 C214.618 163.916 206.6 158.763 198.476 160.53 C190.352 162.297 185.199 170.316 186.966 178.44 Z" fill="#e8ca72" fill-rule="evenodd"/>
+          </svg>
+          <span>Eclipses lunares</span>
+        </div>
+        <div class="ui-switch-capsule"><div class="ui-switch-knob"></div></div>
+      </div>
+      <div class="ui-switch-row">
+        <div class="ui-switch-label">
+          <svg viewBox="0 0 160 160" fill="none">
+            <g fill="#e8ca72">
+              <path d="M37.719 135.792 L142.695 8.253 L13.131 113.388 Z"/>
+              <path d="M41.993 123.706 C42.653 132.72 35.618 140.579 26.279 141.259 C16.94 141.938 8.836 135.182 8.178 126.168 C7.519 117.154 14.554 109.294 23.892 108.615 C33.231 107.935 41.334 114.692 41.993 123.706 Z"/>
+              <path d="M101.474 122.235 L142.56 53.535 L85.892 109.859 Z"/>
+              <path d="M103.386 113.962 C104.564 119.316 101.156 124.614 95.772 125.795 C90.388 126.978 85.07 123.597 83.892 118.243 C82.713 112.889 86.121 107.591 91.504 106.408 C96.887 105.226 102.208 108.608 103.386 113.962 Z"/>
+              <path d="M130.114 128.713 C130.093 125.452 132.808 122.806 136.178 122.806 C139.547 122.804 142.294 125.449 142.315 128.712 C142.335 131.975 139.62 134.62 136.251 134.621 C132.881 134.621 130.134 131.976 130.114 128.713 Z"/>
+              <path d="M37.92 63.529 C37.855 66.657 35.314 69.142 32.243 69.078 C29.172 69.015 26.736 66.427 26.801 63.299 C26.865 60.17 29.407 57.686 32.477 57.749 C35.548 57.813 37.984 60.4 37.92 63.529 Z"/>
+              <path d="M76.892 26.055 C76.63 28.834 74.177 30.874 71.414 30.613 C68.65 30.352 66.623 27.889 66.885 25.111 C67.147 22.332 69.6 20.292 72.363 20.553 C75.127 20.814 77.155 23.277 76.892 26.055 Z"/>
+            </g>
+          </svg>
+          <span>Lluvia de estrellas</span>
+        </div>
+        <div class="ui-switch-capsule"><div class="ui-switch-knob"></div></div>
+      </div>
+    </div>
+
+    <h3>Simulación</h3>
+    <ul>
+      <li><em>Lanzar eclipse:</em> recrea un eclipse lunar total en 40 segundos, incluyendo la entrada de la sombra y la fase de Luna de Sangre.</li>
+      <li><em>Lanzar ráfaga (estrellas):</em> reproduce al instante una secuencia de estrellas fugaces sobre la Luna.</li>
+      <li><em>Lanzar ciclo lunar:</em> recorre de forma continua las fases de los 30 días del mes lunar en 60 segundos.</li>
+    </ul>
+    <div class="ui-card-mini">
+      <div class="ui-card-section-title">Simulación</div>
+      <div class="ui-tests-grid">
+        <div class="ui-btn-test">Lanzar eclipse</div>
+        <div class="ui-btn-test">Lanzar ráfaga</div>
+        <div class="ui-btn-test span-2">Lanzar ciclo lunar</div>
+      </div>
+    </div>
+
+    <h3>Botones inferiores</h3>
+    <div class="icon-actions-row">
+      <div class="btn-icon-action">
+        <svg class="matter-icon" viewBox="0 0 24 24" fill="none">
+          <path fill="#E8CA72" d="M7.228375 6.41685c0.98855 0.80195 2.16365 1.3412 3.416275 1.56765V1.30093l1.3612 -0.7854275 1.360125 0.7854275V7.9845c1.252875 -0.226675 2.4283 -0.765875 3.41735 -1.56765l2.471225 1.4293c-4.019075 3.976275 -10.490025 3.976275 -14.5091 0l2.482925 -1.4293Zm3.00335 17.067575c1.43325 -5.47035 -1.8052 -11.074775 -7.2604 -12.564675v2.859675c1.189125 0.455 2.244125 1.202875 3.0672 2.174275L0.25 19.2955v1.5719l1.3611925 0.781175L7.39865 18.3068c0.430175 1.19825 0.550625 2.48575 0.35015 3.743l2.482925 1.434625ZM21.034 10.91975c-5.452225 1.4932 -8.6871 7.09635 -7.254025 12.564675l2.47655 -1.43035c-0.200025 -1.257275 -0.079575 -2.544675 0.35015 -3.743025l5.7832 3.337525L23.75 20.86315V19.2955L17.961475 15.9537c0.8233 -0.97115 1.878225 -1.718975 3.0672 -2.174275l0.005325 -2.859675Z"></path>
+        </svg>
+      </div>
+      <div class="btn-icon-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E8CA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2V6"/>
+          <path d="M12 18V22"/>
+          <path d="M2 12H6"/>
+          <path d="M18 12H22"/>
+        </svg>
+      </div>
+      <div class="btn-icon-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E8CA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1.851 8.506 C3.345 4.179 7.419 1.275 11.997 1.275 C16.575 1.275 20.649 4.179 22.143 8.506 M22.143 15.488 C20.649 19.816 16.575 22.719 11.997 22.719 C7.419 22.719 3.345 19.816 1.851 15.488"/>
+          <path d="M18.098 11.997 C18.098 15.367 15.367 18.098 11.997 18.098 C8.628 18.098 5.896 15.367 5.896 11.997 C5.896 8.628 8.628 5.896 11.997 5.896 C15.367 5.896 18.098 8.628 18.098 11.997 Z"/>
+          <path d="M1.043 11.997 L5.468 11.997 M18.782 11.997 L22.952 11.997"/>
+        </svg>
+      </div>
+      <div class="btn-icon-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E8CA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          <line x1="9" y1="9" x2="15" y2="9"></line>
+          <line x1="12" y1="6" x2="12" y2="12"></line>
+        </svg>
+      </div>
+      <div class="btn-icon-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E8CA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </div>
+      <div class="btn-icon-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E8CA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Matter:</strong> muestra el código de 11 dígitos para vincular con Matter.</li>
+      <li><strong>Puntos cardinales:</strong> ilumina el Norte en blanco frío y Sur, Este y Oeste en amarillo, para orientar Selene hacia el Norte.</li>
+      <li><strong>Orientación del regulador:</strong> permite elegir si Selene se coloca con el mando a la izquierda o a la derecha, invirtiendo el mapa luminoso para que las fases lunares y el Norte mantengan la orientación correcta.</li>
+      <li><strong>Añadir a pantalla de inicio:</strong> instrucciones para instalar Selene como app.</li>
+      <li><strong>Ubicación:</strong> necesaria en Modo Live para ajustar el ángulo de inclinación de la fase lunar según el lugar (si aún no está configurada, al pulsar <em>Modo Live</em> se abrirá esta ventana automáticamente). Permite usar la ubicación exacta (<em>Posicionar Selene</em>) o elegir manualmente <em>H. Norte / H. Sur</em>.<br>
+        <span class="subnote">El aviso <span class="badge-excl">!</span> indica que está pendiente de configurar.</span>
+      </li>
+      <li><strong>Restablecer de fábrica:</strong> Elimina las credenciales Wi-Fi, ubicación y vinculación Matter, con doble confirmación.</li>
+    </ul>
+
+    <!-- 3. MANDO FÍSICO -->
+    <h2>3. Mando físico</h2>
+    <p>Control directo mediante rueda y pulsador:</p>
+    <ul>
+      <li><strong>Un clic:</strong> encender o apagar la lámpara.</li>
+      <li><strong>Girar la rueda:</strong> regular el brillo (en Modo Live desactiva el brillo automático).</li>
+      <li><strong>Doble clic:</strong> alternar entre modo <strong>Live</strong> y modo <strong>Fijo</strong>.</li>
+      <li><strong>Mantener pulsado:</strong>
+        <ul style="margin-top: 6px; margin-left: 16px;">
+          <li><strong>5 segundos:</strong> activar el modo de vinculación Wi-Fi.</li>
+          <li><strong>5 s + otros 5 s:</strong> restablecimiento de fábrica.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- 4. INTEGRACIÓN CON MATTER -->
+    <h2>4. Integración con Matter</h2>
+    <p>Vincular Selene en <strong>Apple Casa, Google Home, Amazon Alexa o Home Assistant</strong>:</p>
+    <ol>
+      <li>Conectar Selene y el dispositivo móvil a la misma red Wi-Fi.</li>
+      <li>Escanear el <strong>código QR impreso en la parte trasera de Selene</strong> (o introducir el código de 11 dígitos visible en la app/web).</li>
+      <li>Seguir las indicaciones del asistente para completar la vinculación.</li>
+    </ol>
+    <div class="matter-modal-card">
+      <div class="matter-modal-header">
+        <span class="matter-modal-title">Código Matter</span>
+        <span class="matter-modal-close">&times;</span>
+      </div>
+      <div class="matter-code-box">
+        <span class="matter-code-num">1234-123-1234</span>
+        <span class="matter-copy-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- 5. ALCANCE -->
+    <h2>5. Alcance</h2>
+    <ul>
+      <li><strong>Fuera de casa (Fuera de alcance):</strong> la app y el panel web funcionan únicamente dentro de la red Wi-Fi doméstica. Fuera de casa no es posible conectarse directamente, salvo que se haya vinculado con <strong>Matter</strong> (Google Home, Apple Casa, Alexa, etc.).</li>
+      <li><strong>Sin respuesta en la misma red Wi-Fi:</strong> si el móvil está conectado al mismo Wi-Fi en el que se configuró Selene pero esta no aparece, significa que se encuentra desconectada de la corriente o que ha sido restablecida de fábrica y debe vincularse de nuevo.</li>
+    </ul>
+
+    <!-- 6. ESPECIFICACIONES TÉCNICAS -->
+    <h2>6. Especificaciones técnicas</h2>
+    <table class="spec-table">
+      <tr><td class="label">Alimentación</td><td class="val">24 V</td></tr>
+      <tr><td class="label">Consumo en reposo</td><td class="val">0,5 W</td></tr>
+      <tr><td class="label">Consumo máximo</td><td class="val">18 W (brillo al 100 %)</td></tr>
+      <tr><td class="label">Tipo de luz</td><td class="val">Blanco dual</td></tr>
+      <tr><td class="label">Temperatura de color</td><td class="val">4.000 K &ndash; 6.000 K</td></tr>
+      <tr><td class="label">Conectividad</td><td class="val">Wi-Fi 2,4 GHz · Bluetooth 5.0 · Matter</td></tr>
+    </table>
+  </main>
+
+</body>
+</html>
